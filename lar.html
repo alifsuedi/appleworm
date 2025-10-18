@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Snake</title>
+    <link rel="stylesheet" href="ula.css">
+</head>
+<body>
+    <h1>Game Snake</h1>
+    <div class="controls top-controls">
+        <label for="levelSelect">Pilih Tempat:</label>
+        <select id="levelSelect">
+            <option value="classic">Classic (20x20)</option>
+            <option value="dense">Dense (25x25)</option>
+            <option value="wide">Wide (30x15)</option>
+        </select>
+        <label for="wallModeSelect">Mode Dinding:</label>
+        <select id="wallModeSelect">
+            <option value="wrap">Tembus (wrap)</option>
+            <option value="solid">Solid (mati jika nabrak)</option>
+        </select>
+        <button id="restartBtn">Restart</button>
+        <button id="resetHighBtn">Reset High Score</button>
+        <label class="auto-start-label"><input type="checkbox" id="autoStartChk"> Auto-start</label>
+    </div>
+
+    <div class="canvas-wrap">
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+    </div>
+    <h2 id="score">Score: 0</h2>
+    <h2 id="highScore">High Score: 0</h2>
+    <div id="overlay" class="overlay hidden">
+        <div class="overlay-box">
+            <h2 id="overlayTitle">Game Over</h2>
+            <p id="overlayScore">Score: 0</p>
+            <button id="playAgainBtn">Play Again</button>
+        </div>
+    </div>
+    
+    <!-- On-screen D-pad for mobile -->
+    <div class="dpad" id="dpad">
+        <button class="dpad-btn up" data-dir="up">▲</button>
+        <div class="dpad-row">
+            <button class="dpad-btn left" data-dir="left">◀</button>
+            <button class="dpad-btn right" data-dir="right">▶</button>
+        </div>
+        <button class="dpad-btn down" data-dir="down">▼</button>
+    </div>
+    <script src="ular.js"></script>
+</body>
+</html>

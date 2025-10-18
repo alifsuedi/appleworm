@@ -1,0 +1,79 @@
+
+/* Retro / Pixelated UI for Snake game */
+
+:root{
+    --bg:#071017; /* deep navy */
+    --panel:#0b1620; /* darker panel */
+    --accent:#00f5a0; /* neon green */
+    --accent-2:#ff5fb4; /* neon pink */
+    --muted:#9aa5ad;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(180deg, #02111a 0%, var(--bg) 100%);
+    color: var(--muted);
+    min-height: 100vh;
+    padding: 16px 12px;
+}
+
+h1{
+    margin: 8px 0 12px 0;
+    color: var(--accent);
+    text-shadow: 0 0 6px rgba(0,245,160,0.12);
+    font-size: 18px;
+}
+
+.canvas-wrap{
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 6px);
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 0 24px rgba(0,255,200,0.02);
+    border: 6px solid rgba(0,0,0,0.6);
+    position: relative;
+}
+
+canvas{
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background: #061018;
+    display:block;
+    touch-action: none;
+    -ms-touch-action: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.7), inset 0 0 8px rgba(0,245,160,0.04);
+    border: 3px solid rgba(0,245,160,0.08);
+}
+
+h2{ margin-top: 10px; color: var(--muted); font-size: 12px }
+
+.controls{ display:flex; gap:10px; align-items:center; margin-bottom:10px; flex-wrap:wrap; justify-content:center }
+
+select, button{ padding:8px 10px; font-size:12px; color:#041018; background:linear-gradient(180deg,#b6ffd6,#86f0b2); border-radius:6px; border:none; cursor:pointer }
+
+.auto-start-label{ display:flex; gap:6px; align-items:center; color:var(--muted); font-size:12px }
+
+.overlay{ position:fixed; left:0; top:0; right:0; bottom:0; display:flex; align-items:center; justify-content:center; background: rgba(2,6,10,0.6) }
+.overlay.hidden{ display:none }
+.overlay-box{ background: linear-gradient(180deg,#021318,#052027); padding:18px 22px; border-radius:8px; box-shadow: 0 8px 30px rgba(0,0,0,0.8); border: 2px solid rgba(0,245,160,0.08); color:var(--muted); text-align:center }
+.overlay-box h2{ color:var(--accent); font-size:14px }
+.overlay-box button{ margin-top:10px; padding:8px 12px }
+
+#score, #highScore{ display:inline-block; margin:6px 8px; padding:6px 10px; border-radius:6px; background: rgba(255,255,255,0.02); color:var(--muted); font-size:12px; border:1px solid rgba(255,255,255,0.02) }
+
+.dpad{ display:none; gap:8px; align-items:center; justify-content:center }
+.dpad-row{ display:flex; gap:8px }
+.dpad-btn{ width:66px; height:66px; border-radius:10px; border:2px solid rgba(255,255,255,0.04); background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.12)); color:var(--muted); font-weight:700; font-size:20px; box-shadow:0 6px 12px rgba(0,0,0,0.6) }
+.dpad-btn:active{ transform:translateY(1px); box-shadow:0 3px 6px rgba(0,0,0,0.5); background:linear-gradient(180deg, rgba(0,0,0,0.12), rgba(255,255,255,0.02)) }
+
+@media (max-width:480px){
+    .top-controls{ justify-content:center }
+    canvas{ width: calc(96vw); height: auto }
+    .dpad{ display:flex; position:fixed; bottom:18px; left:50%; transform:translateX(-50%) }
+    .dpad-btn{ width:56px; height:56px; font-size:18px }
+}
+
+.hidden{ display:none }
+
