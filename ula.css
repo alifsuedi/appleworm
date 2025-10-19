@@ -20,6 +20,22 @@ body{
     padding: 16px 12px;
 }
 
+/* Prevent page overscroll and selection while playing on mobile */
+html, body {
+    height: 100%;
+    overscroll-behavior: none; /* stop pull-to-refresh/overscroll */
+    -webkit-overflow-scrolling: auto;
+}
+
+/* make the interactive controls ignore native gestures */
+canvas, .dpad, .dpad-btn, .controls, .top-controls {
+    touch-action: none; /* disable default touch gestures */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
 h1{
     margin: 8px 0 12px 0;
     color: var(--accent);

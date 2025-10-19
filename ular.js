@@ -155,6 +155,47 @@ if (dpad) {
     });
 }
 
+// --- Prevent page scroll while interacting with the game on mobile ---
+// We set a flag when the user is touching/pressing the canvas or dpad and
+// prevent default touchmove on the document while the flag is active.
+let isInteracting = false;
+
+function setInteracting(v) {
+    isInteracting = !!v;
+}
+
+// Canvas interaction: pointer events preferred
+canvas.addEventListener('pointerdown', (e) => { setInteracting(true); }, { passive: true });
+canvas.addEventListener('pointerup', (e) => { setInteracting(false); }, { passive: true });
+canvas.addEventListener('pointercancel', (e) => { setInteracting(false); }, { passive: true });
+canvas.addEventListener('pointerleave', (e) => { setInteracting(false); }, { passive: true });
+
+if (dpad) {
+    dpad.addEventListener('pointerdown', (e) => { setInteracting(true); }, { passive: true });
+    dpad.addEventListener('pointerup', (e) => { setInteracting(false); }, { passive: true });
+    dpad.addEventListener('pointercancel', (e) => { setInteracting(false); }, { passive: true });
+}
+
+// For older devices or cases where touch events fire directly, handle touchstart/touchend
+canvas.addEventListener('touchstart', (e) => { setInteracting(true); }, { passive: true });
+canvas.addEventListener('touchend', (e) => { setInteracting(false); }, { passive: true });
+canvas.addEventListener('touchcancel', (e) => { setInteracting(false); }, { passive: true });
+
+// Global touchmove blocker that only prevents default when interacting with game
+document.addEventListener('touchmove', function (e) {
+    if (isInteracting) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Also prevent passive wheel/scroll when interacting on desktop touchpads
+document.addEventListener('wheel', function (e) {
+    if (isInteracting) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+
 function applyDirection(dir) {
     if (dir === 'up' && direction.y === 0) direction = { x: 0, y: -1 };
     else if (dir === 'down' && direction.y === 0) direction = { x: 0, y: 1 };
